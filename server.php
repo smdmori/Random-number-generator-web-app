@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Result of RandNumGen</title>
 </head>
 
 <body>
@@ -15,15 +15,13 @@
   if (isset($_POST['submit'])) {
     $dice_count = (int) $_POST['dice-count'];
     $dice_side = (int) $_POST['dice-side'];
-
-    var_dump($dice_count, $dice_side);
   }
   ?>
 
   <?php
+  /** rand function that uses number of dices for input and returns dice digits in the form of dice-side count */
   function random_dice_roller($number_of_dices, $number_of_sides)
   {
-    // rand function that uses number of dices for input and returns dice digits in the form of dice-side count
     $rolled_dices = [];
 
     for ($i = 0; $i < $number_of_dices; $i++) {
@@ -32,13 +30,21 @@
 
     return $rolled_dices;
   }
-  var_dump(random_dice_roller($dice_count, $dice_side));
+  $rolled_dices = random_dice_roller($dice_count, $dice_side);
 
-  // output # of dice rolled, the type of dice, the total count of the dices rolled
-  echo "$dice_count dices rolled with type of $dice_side";
 
-  // output details (numbers) of the individual dice rolls (possibly using a foreach loop)
+  //? output # of dice rolled, the type of dice, the total count of the dices rolled
+  //? output details (numbers) of the individual dice rolls (possibly using a foreach loop)
+  echo "You asked for $dice_count dices, with $dice_side sides each, from 1 to $dice_side.<br>";
 
+  echo "<br>The result is:<br>";
+  $sum_of_dices = 0;
+  foreach ($rolled_dices as $value) {
+    echo "Value of the rolled dice is $value</br>";
+    $sum_of_dices += $value;
+  }
+
+  echo "<br>Total count of dices rolled is $sum_of_dices"
 
   ?>
 </body>
